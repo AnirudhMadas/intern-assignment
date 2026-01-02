@@ -2,6 +2,14 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+
+export const getProfile = async (req, res) => {
+  const user = await User.findById(req.user.id).select("-password");
+  res.json(user);
+};
+
+
+
 export const getAllUsers = async (req, res) => {
   const users = await User.find().select("-password");
   res.json(users);
